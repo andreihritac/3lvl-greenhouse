@@ -1,6 +1,14 @@
 #include <Arduino.h>
 
-
+#define RELAY1    // de scris tip conexiune                      
+#define RELAY2                          
+#define RELAY3                          
+#define RELAY4  
+#define RELAY5
+#define RELAY6
+#define RELAY7
+#define RELAY8
+// ----------------------------------------------------------------------------------------
 
 const int ENA = 7;
 const int IN1 = 6;
@@ -12,14 +20,24 @@ const int ledPin = 13;
 
 void setup()
 {
-  pinMode(ENA,OUTPUT);
-  pinMode(IN1,OUTPUT);
-  pinMode(IN2,OUTPUT);
-  pinMode(ENB,OUTPUT);
-  pinMode(IN3,OUTPUT);
-  pinMode(IN4,OUTPUT);
-  pinMode(ledPin,OUTPUT);
-  digitalWrite(ledPin, LOW);
+	Serial.begin(9600);
+	pinMode(RELAY1, OUTPUT);
+	pinMode(RELAY2, OUTPUT);
+	pinMode(RELAY3, OUTPUT);
+	pinMode(RELAY4, OUTPUT);
+	pinMode(RELAY5, OUTPUT);
+	pinMode(RELAY6, OUTPUT);
+	pinMode(RELAY7, OUTPUT);
+	pinMode(RELAY8, OUTPUT);
+	//------------------------------------------------------------------
+	 pinMode(ENA,OUTPUT);
+	 pinMode(IN1,OUTPUT);
+	 pinMode(IN2,OUTPUT);
+	 pinMode(ENB,OUTPUT);
+	 pinMode(IN3,OUTPUT);
+	 pinMode(IN4,OUTPUT);
+	 pinMode(ledPin,OUTPUT);
+	 digitalWrite(ledPin, LOW);
 
   //delay is used to control the speed, the lower the faster.
   //reverse(step,delay);
@@ -30,6 +48,22 @@ void setup()
 
 void loop()
 {
+	if (Serial.available() > 0) {
+		int inByte = Serial.read();
+		switch (inByte) {
+		case 'a':
+			///
+			break;
+		case 'b':
+			///
+			break;
+		}
+
+	}
+
+
+
+
 }
 
 void reverse(int i, int j) {
