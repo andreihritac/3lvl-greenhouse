@@ -1,13 +1,13 @@
 #include <Arduino.h>
 
-#define RELAY1    // de scris tip conexiune                      
-#define RELAY2                          
-#define RELAY3                          
-#define RELAY4  
-#define RELAY5
-#define RELAY6
-#define RELAY7
-#define RELAY8
+#define RELAY1  22  // de scris tip conexiune                      
+#define RELAY2   24                      
+#define RELAY3    26                     
+#define RELAY4  28
+#define RELAY5  30
+#define RELAY6  32
+#define RELAY7  34
+#define RELAY8  36
 // ----------------------------------------------------------------------------------------
 
 const int ENA = 7;

@@ -1,45 +1,159 @@
-// RELAY TEST
-//test pull
-int relay1 = 2;
-int relay2 = 3;
-int relay3 = 4;
-int relay4 = 5;
-int relay5 = 6;
-int relay6 = 7;
-int relay7 = 8;
-int relay8 = 9;
+#include <Arduino.h>
 
-void setup() {
-  Serial.begin(9600);
-  pinMode(relay1, OUTPUT);
-  pinMode(relay2, OUTPUT);
-  pinMode(relay3, OUTPUT);
-  pinMode(relay4, OUTPUT);
-  pinMode(relay5, OUTPUT);
-  pinMode(relay6, OUTPUT);
-  pinMode(relay7, OUTPUT);
-  pinMode(relay8, OUTPUT);
+#define RELAY1 22   // de scris tip conexiune                      
+#define RELAY2   24                       
+#define RELAY3     26                     
+#define RELAY4  28
+#define RELAY5   30
+#define RELAY6   32
+#define RELAY7   34
+#define RELAY8   36
+// ----------------------------------------------------------------------------------------
+
+const int ENA = 7;
+const int IN1 = 6;
+const int IN2 = 5;
+const int ENB = 8;
+const int IN4 = 9;
+const int IN3 = 10;
+const int ledPin = 13;
+
+void setup()
+{
+	Serial.begin(9600);
+	pinMode(RELAY1, OUTPUT);
+	pinMode(RELAY2, OUTPUT);
+	pinMode(RELAY3, OUTPUT);
+	pinMode(RELAY4, OUTPUT);
+	pinMode(RELAY5, OUTPUT);
+	pinMode(RELAY6, OUTPUT);
+	pinMode(RELAY7, OUTPUT);
+	pinMode(RELAY8, OUTPUT);
+	//------------------------------------------------------------------
+	pinMode(ENA, OUTPUT);
+	pinMode(IN1, OUTPUT);
+	pinMode(IN2, OUTPUT);
+	pinMode(ENB, OUTPUT);
+	pinMode(IN3, OUTPUT);
+	pinMode(IN4, OUTPUT);
+	pinMode(ledPin, OUTPUT);
+	digitalWrite(ledPin, LOW);
+
+	//delay is used to control the speed, the lower the faster.
+	//reverse(step,delay);
+	//  reverse(80,20);
+	//forward(step,delay);
+	//  forward(80,20);
 }
 
-void loop() {  
-      setRelayState(0,1);
-      delay(1000);
-      setRelayState(1, 1);
-      delay(1000);
-      setRelayState(1, 0);
-      delay(1000);
-      setRelayState(0, 0);
-      delay(1000);
-}
+void loop()
+{
+	if (Serial.available() > 0) {
+		int inByte = Serial.read();
+		switch (inByte) {
+		case 'a':
+			///
+			break;
+		case 'b':
+			///
+			break;
+		}
+
+	}
 
 
-void setRelayState(int relay, int state) {
-  if (relay == 1) digitalWrite(relay2, state);
-  if (relay == 0) digitalWrite(relay1, state);
-  if (relay == 1) digitalWrite(relay3, state);
-  if (relay == 0) digitalWrite(relay4, state);
-  if (relay == 1) digitalWrite(relay5, state);
-  if (relay == 0) digitalWrite(relay6, state);
-  if (relay == 1) digitalWrite(relay7, state);
-  if (relay == 0) digitalWrite(relay8, state);
+
+
 }
+
+void reverse(int i, int j) {
+
+	// set both motors ON
+	digitalWrite(ENA, HIGH);
+	digitalWrite(ENB, HIGH);
+
+	while (1) {
+		digitalWrite(IN1, 0);
+		digitalWrite(IN2, 1);
+		digitalWrite(IN3, 0);
+		digitalWrite(IN4, 1);
+		delay(j);
+		i--;
+		if (i < 1) break;
+
+		digitalWrite(IN1, 0);
+		digitalWrite(IN2, 1);
+		digitalWrite(IN3, 1);
+		digitalWrite(IN4, 0);
+		delay(j);
+		i--;
+		if (i < 1) break;
+
+		digitalWrite(IN1, 1);
+		digitalWrite(IN2, 0);
+		digitalWrite(IN3, 1);
+		digitalWrite(IN4, 0);
+		delay(j);
+		i--;
+		if (i < 1) break;
+
+		digitalWrite(IN1, 1);
+		digitalWrite(IN2, 0);
+		digitalWrite(IN3, 0);
+		digitalWrite(IN4, 1);
+		delay(j);
+		i--;
+		if (i < 1) break;
+	}
+
+	// set both motors OFF
+	digitalWrite(ENA, LOW);
+	digitalWrite(ENB, LOW);
+
+}  // end reverse()
+
+void forward(int i, int j) {
+
+	// Set both motors ON
+	digitalWrite(ENA, HIGH);
+	digitalWrite(ENB, HIGH);
+
+	while (1) {
+		digitalWrite(IN1, 0);
+		digitalWrite(IN2, 1);
+		digitalWrite(IN3, 0);
+		digitalWrite(IN4, 1);
+		delay(j);
+		i--;
+		if (i < 1) break;
+
+		digitalWrite(IN1, 1);
+		digitalWrite(IN2, 0);
+		digitalWrite(IN3, 0);
+		digitalWrite(IN4, 1);
+		delay(j);
+		i--;
+		if (i < 1) break;
+
+		digitalWrite(IN1, 1);
+		digitalWrite(IN2, 0);
+		digitalWrite(IN3, 1);
+		digitalWrite(IN4, 0);
+		delay(j);
+		i--;
+		if (i < 1) break;
+
+		digitalWrite(IN1, 0);
+		digitalWrite(IN2, 1);
+		digitalWrite(IN3, 1);
+		digitalWrite(IN4, 0);
+		delay(j);
+		i--;
+		if (i < 1) break;
+	}
+
+	// set both motors OFF
+	digitalWrite(ENA, LOW);
+	digitalWrite(ENB, LOW);
+
+}  // end forward()
