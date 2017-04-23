@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
-#define RELAY1 22   // de scris tip conexiune                      
+#define RELAY1   22   // de scris tip conexiune                      
 #define RELAY2   24                       
-#define RELAY3     26                     
-#define RELAY4  28
+#define RELAY3   26                     
+#define RELAY4   28
 #define RELAY5   30
 #define RELAY6   32
 #define RELAY7   34
@@ -52,10 +52,12 @@ void loop()
 		int inByte = Serial.read();
 		switch (inByte) {
 		case 'a':
-			///
+			forward(80, 20);
 			break;
 		case 'b':
-			///
+			digitalWrite(RELAY1, LOW);           
+			delay(2000);                                
+			digitalWrite(RELAY1, HIGH);          
 			break;
 		}
 
