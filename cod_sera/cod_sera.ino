@@ -53,7 +53,7 @@ void setup()
 void loop()
 {
 	if (Serial.available() > 0) {
-		int inByte = Serial.read();
+		char inByte = Serial.read();
 		switch (inByte) {
 		case 'a':
 			forward(80, 20);
@@ -66,9 +66,9 @@ void loop()
 		}
 
 	}
-	Serial.print("Humidity: ");
+	
 	// Wait a few seconds between measurements.
-/*	delay(2000);
+	//delay(2000);
 
 	// Reading temperature or humidity takes about 250 milliseconds!
 	// Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
@@ -87,7 +87,7 @@ void loop()
 	// Compute heat index
 	// Must send in temp in Fahrenheit!
 	float hi = dht.computeHeatIndex(f, h);
-
+/*
 	Serial.print("Humidity: ");
 	Serial.print(h);
 	Serial.print(" %\t");
@@ -100,7 +100,7 @@ void loop()
 	Serial.print(hi);
 	Serial.println(" *F");
 
-*/	
+	*/
 
 }
 
